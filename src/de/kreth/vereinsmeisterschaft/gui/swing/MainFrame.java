@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import de.kreth.vereinsmeisterschaftprog.business.MainFrameBusiness;
+import de.kreth.vereinsmeisterschaftprog.business.MainBusiness;
 import de.kreth.vereinsmeisterschaftprog.data.Gruppe;
 import de.kreth.vereinsmeisterschaftprog.views.MainView;
 
@@ -20,7 +20,7 @@ public class MainFrame extends JFrame implements MainView {
 
    private static final long serialVersionUID = 5118057573440157488L;
    private JPanel contentPane;
-   private MainFrameBusiness business;
+   private MainBusiness business;
    private DefaultListModel<Gruppe> model;
 
    /**
@@ -96,7 +96,7 @@ public class MainFrame extends JFrame implements MainView {
       
       panel.add(btnExport, BorderLayout.SOUTH);
 
-      business = new MainFrameBusiness(this);
+      business = new MainBusiness(this);
       WettkampfPanel wkPanel = new WettkampfPanel(business.getWettkampfBusiness());
       contentPane.add(wkPanel, BorderLayout.CENTER);
 
