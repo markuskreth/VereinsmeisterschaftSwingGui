@@ -10,8 +10,8 @@ import java.text.ParseException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import de.kreth.vereinsmeisterschaftprog.business.CompetitionBusiness;
 import de.kreth.vereinsmeisterschaftprog.business.InputConverter;
-import de.kreth.vereinsmeisterschaftprog.business.WettkampfBusiness;
 import de.kreth.vereinsmeisterschaftprog.data.Durchgang;
 import de.kreth.vereinsmeisterschaftprog.data.Ergebnis;
 import de.kreth.vereinsmeisterschaftprog.data.Wertung;
@@ -38,7 +38,7 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
    /**
     * Create the dialog.
     */
-   public WertenDialog(final WettkampfBusiness business) {
+   public WertenDialog(final CompetitionBusiness business) {
 
       setDefaultCloseOperation(HIDE_ON_CLOSE);
 

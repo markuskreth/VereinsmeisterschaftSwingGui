@@ -11,15 +11,15 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
 
-import de.kreth.vereinsmeisterschaftprog.business.WettkampfBusiness;
+import de.kreth.vereinsmeisterschaftprog.business.CompetitionBusiness;
 import de.kreth.vereinsmeisterschaftprog.data.*;
-import de.kreth.vereinsmeisterschaftprog.views.WettkampfView;
+import de.kreth.vereinsmeisterschaftprog.views.CompetitionView;
 
-public class WettkampfPanel extends JPanel implements WettkampfView {
+public class WettkampfPanel extends JPanel implements CompetitionView {
 
    private static final long serialVersionUID = -257839817852907002L;
 
-   private WettkampfBusiness business;
+   private CompetitionBusiness business;
    private JTable table;
    private MyTableModel tableModel;
    final JComboBox<Durchgang> comboBox_Durchgang = new JComboBox<>();
@@ -31,7 +31,7 @@ public class WettkampfPanel extends JPanel implements WettkampfView {
     * 
     * @param wettkampfBusiness
     */
-   public WettkampfPanel(final WettkampfBusiness wettkampfBusiness) {
+   public WettkampfPanel(final CompetitionBusiness wettkampfBusiness) {
 
       tableModel = new MyTableModel();
       table = new JTable();
@@ -94,23 +94,6 @@ public class WettkampfPanel extends JPanel implements WettkampfView {
       add(scroller, BorderLayout.CENTER);
       
       this.business.setView(this);   
-   }
-
-   /* (non-Javadoc)
-    * @see de.kreth.vereinsmeisterschaft.gui.swing.WettkampfView#setWettkampf(de.kreth.vereinsmeisterschaftprog.data.Wettkampf)
-    */
-   @Override
-   public void setWettkampf(Wettkampf wettkampf) {
-
-      tableModel.removeAllElements();
-      
-      if(wettkampf != null) {
-         
-         for (Ergebnis e : wettkampf.getErgebnisse()) {
-            tableModel.addElement(e);
-         }
-         
-      }
    }
 
    private class ButtonRenderer implements TableCellRenderer {
@@ -262,5 +245,19 @@ public class WettkampfPanel extends JPanel implements WettkampfView {
    public void showWertung(String starterName, Wertung wertung) {
       wertenDialog.setWertung(starterName, wertung);
       wertenDialog.setVisible(true);
+   }
+
+   @Override
+   public void setCompetition(Competition wettkampf) {
+
+      tableModel.removeAllElements();
+      
+      if(wettkampf != null) {
+         
+         for (Ergebnis e : wettkampf.getErgebnisse()) {
+            tableModel.addElement(e);
+         }
+         
+      }
    }
 }

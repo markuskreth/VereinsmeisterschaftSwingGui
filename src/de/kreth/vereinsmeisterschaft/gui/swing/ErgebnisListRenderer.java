@@ -6,7 +6,7 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
-import de.kreth.vereinsmeisterschaftprog.business.WettkampfBusiness;
+import de.kreth.vereinsmeisterschaftprog.business.CompetitionBusiness;
 import de.kreth.vereinsmeisterschaftprog.data.Durchgang;
 import de.kreth.vereinsmeisterschaftprog.data.Ergebnis;
 
@@ -15,10 +15,10 @@ public class ErgebnisListRenderer extends DefaultListCellRenderer {
 
    private static final long serialVersionUID = -5584364908962488266L;
    private Durchgang durchgang = Durchgang.PFLICHT;
-   private WettkampfBusiness business;
+   private CompetitionBusiness business;
    
    
-   public ErgebnisListRenderer(WettkampfBusiness business) {
+   public ErgebnisListRenderer(CompetitionBusiness business) {
       super();
       this.business = business;
    }

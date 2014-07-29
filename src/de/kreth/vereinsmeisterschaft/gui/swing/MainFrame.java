@@ -2,6 +2,9 @@ package de.kreth.vereinsmeisterschaft.gui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,19 +12,15 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import de.kreth.vereinsmeisterschaftprog.business.MainBusiness;
-import de.kreth.vereinsmeisterschaftprog.data.Gruppe;
+import de.kreth.vereinsmeisterschaftprog.data.CompetitionGroup;
 import de.kreth.vereinsmeisterschaftprog.views.MainView;
-
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame implements MainView {
 
    private static final long serialVersionUID = 5118057573440157488L;
    private JPanel contentPane;
    private MainBusiness business;
-   private DefaultListModel<Gruppe> model;
+   private DefaultListModel<CompetitionGroup> model;
 
    /**
     * Create the frame.
@@ -36,7 +35,7 @@ public class MainFrame extends JFrame implements MainView {
       contentPane.setLayout(new BorderLayout(0, 0));
       setContentPane(contentPane);
 
-      model = new DefaultListModel<Gruppe>() {
+      model = new DefaultListModel<CompetitionGroup>() {
 
          private static final long serialVersionUID = -3809219187518599443L;
 
@@ -46,7 +45,7 @@ public class MainFrame extends JFrame implements MainView {
          @Override
          public void clear() {
             super.clear();
-            addElement(new Gruppe(-1, "Hinzufügen", "Kein Eintrag! Neu erstellen, wenn gewählt!"));
+            addElement(new CompetitionGroup(-1, "Hinzufügen", "Kein Eintrag! Neu erstellen, wenn gewählt!"));
          }
       };
 
@@ -54,7 +53,7 @@ public class MainFrame extends JFrame implements MainView {
       contentPane.add(panel, BorderLayout.WEST);
       panel.setLayout(new BorderLayout(0, 0));
 
-      final JList<Gruppe> pflichtenView = new JList<Gruppe>();
+      final JList<CompetitionGroup> pflichtenView = new JList<CompetitionGroup>();
       panel.add(pflichtenView, BorderLayout.CENTER);
       
       pflichtenView.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -72,7 +71,7 @@ public class MainFrame extends JFrame implements MainView {
 
             if (!e.getValueIsAdjusting()) {
 
-               Gruppe selection = pflichtenView.getSelectedValue();
+               CompetitionGroup selection = pflichtenView.getSelectedValue();
                if(selection != null)
                   business.pflichtChange(selection);
             }
@@ -90,14 +89,14 @@ public class MainFrame extends JFrame implements MainView {
 
          @Override
          public void actionPerformed(ActionEvent e) {
-            business.doExport();
+            business.doExportGroup();
          }
       });
       
       panel.add(btnExport, BorderLayout.SOUTH);
 
       business = new MainBusiness(this);
-      WettkampfPanel wkPanel = new WettkampfPanel(business.getWettkampfBusiness());
+      WettkampfPanel wkPanel = new WettkampfPanel(business.getCompetitionBusiness());
       contentPane.add(wkPanel, BorderLayout.CENTER);
 
       refreshGroups();
@@ -120,9 +119,14 @@ public class MainFrame extends JFrame implements MainView {
    private void refreshGroups() {
       model.clear();
       
-      for (Gruppe p : business.getGruppen())
+      for (CompetitionGroup p : business.getCompetitionGroups())
          model.addElement(p);
 
+   }
+
+   @Override
+   public void groupsChanged() {
+      refreshGroups();
    }
 
 }

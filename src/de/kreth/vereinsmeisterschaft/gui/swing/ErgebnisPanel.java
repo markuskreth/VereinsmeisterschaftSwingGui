@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import de.kreth.vereinsmeisterschaftprog.business.WettkampfBusiness;
+import de.kreth.vereinsmeisterschaftprog.business.CompetitionBusiness;
 import de.kreth.vereinsmeisterschaftprog.data.Durchgang;
 import de.kreth.vereinsmeisterschaftprog.data.Ergebnis;
 import de.kreth.vereinsmeisterschaftprog.data.Wertung;
@@ -33,7 +33,7 @@ public class ErgebnisPanel extends JPanel {
     * @param durchgang 
     * @param business 
     */
-   public ErgebnisPanel(final Ergebnis ergebnis, final Durchgang durchgang, WettkampfBusiness business) {
+   public ErgebnisPanel(final Ergebnis ergebnis, final Durchgang durchgang, CompetitionBusiness business) {
       this.ergebnis = ergebnis;
       FlowLayout flowLayout = (FlowLayout) getLayout();
       flowLayout.setHgap(15);
