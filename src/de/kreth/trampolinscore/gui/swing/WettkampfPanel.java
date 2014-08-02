@@ -1,4 +1,4 @@
-package de.kreth.vereinsmeisterschaft.gui.swing;
+package de.kreth.trampolinscore.gui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -11,9 +11,9 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
 
-import de.kreth.vereinsmeisterschaftprog.business.CompetitionBusiness;
-import de.kreth.vereinsmeisterschaftprog.data.*;
-import de.kreth.vereinsmeisterschaftprog.views.CompetitionView;
+import de.kreth.trampolinscore.business.CompetitionBusiness;
+import de.kreth.trampolinscore.data.*;
+import de.kreth.trampolinscore.views.CompetitionView;
 
 public class WettkampfPanel extends JPanel implements CompetitionView {
 
@@ -22,7 +22,7 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
    private CompetitionBusiness business;
    private JTable table;
    private MyTableModel tableModel;
-   final JComboBox<Durchgang> comboBox_Durchgang = new JComboBox<>();
+   final JComboBox<RoutineType> comboBox_Durchgang = new JComboBox<>();
 
    private WertenDialog wertenDialog;
 
@@ -58,19 +58,19 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
       JLabel lblDurchgang = new JLabel("Durchgang");
       panel.add(lblDurchgang);
       
-      comboBox_Durchgang.setModel(new DefaultComboBoxModel<Durchgang>(Durchgang.values()));
+      comboBox_Durchgang.setModel(new DefaultComboBoxModel<RoutineType>(RoutineType.values()));
       panel.add(comboBox_Durchgang);
 
       JLabel lblSortierung = new JLabel("Sortierung");
       panel.add(lblSortierung);
       
-      final JComboBox<Sortierung> comboBox = new JComboBox<>();
-      comboBox.setModel(new DefaultComboBoxModel<Sortierung>(Sortierung.values()));
+      final JComboBox<Sorting> comboBox = new JComboBox<>();
+      comboBox.setModel(new DefaultComboBoxModel<Sorting>(Sorting.values()));
       comboBox.addActionListener(new ActionListener() {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            Sortierung sort = (Sortierung) comboBox.getSelectedItem();
+            Sorting sort = (Sorting) comboBox.getSelectedItem();
             tableModel.setSortierung(sort );
          }
       });
@@ -146,24 +146,24 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
 
       private static final long serialVersionUID = 2910124315519583475L;
       private String[] columnNames = { "Starter", "Pflicht", "Kür", "Gesamt", "Platz", "" };
-      private List<Ergebnis> data = new ArrayList<>();
+      private List<Result> data = new ArrayList<>();
       private List<JButton> editButtons = new ArrayList<>();
 
       DecimalFormat df = new DecimalFormat("0.0##");
 
-      public void setSortierung(Sortierung sort) {
+      public void setSortierung(Sorting sort) {
          business.setSortierung(sort);
          fireTableDataChanged();
       }
 
-      public void addElement(final Ergebnis e) {
+      public void addElement(final Result e) {
          data.add(e);
          JButton b = new JButton("Werten");
          b.addActionListener(new ActionListener() {
             int index = data.size()-1;
             @Override
             public void actionPerformed(ActionEvent ev) {
-               business.werteErgebnis(data.get(index), (Durchgang) comboBox_Durchgang.getSelectedItem());
+               business.werteErgebnis(data.get(index), (RoutineType) comboBox_Durchgang.getSelectedItem());
             }
          });
          editButtons.add(b);
@@ -208,7 +208,7 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
 
       @Override
       public Object getValueAt(int rowIndex, int columnIndex) {
-         Ergebnis ergebnis = data.get(rowIndex);
+         Result ergebnis = data.get(rowIndex);
          Object value;
          switch (columnIndex) {
             case 0:
@@ -216,11 +216,11 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
                break;
 
             case 1:
-               value = df.format(ergebnis.getPflicht().getErgebnis());
+               value = df.format(ergebnis.getPflicht().getResult());
                break;
 
             case 2:
-               value = df.format(ergebnis.getKuer().getErgebnis());
+               value = df.format(ergebnis.getKuer().getResult());
                break;
 
             case 3:
@@ -242,7 +242,7 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
    }
 
    @Override
-   public void showWertung(String starterName, Wertung wertung) {
+   public void showWertung(String starterName, Routine wertung) {
       wertenDialog.setWertung(starterName, wertung);
       wertenDialog.setVisible(true);
    }
@@ -254,7 +254,7 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
       
       if(wettkampf != null) {
          
-         for (Ergebnis e : wettkampf.getErgebnisse()) {
+         for (Result e : wettkampf.getErgebnisse()) {
             tableModel.addElement(e);
          }
          

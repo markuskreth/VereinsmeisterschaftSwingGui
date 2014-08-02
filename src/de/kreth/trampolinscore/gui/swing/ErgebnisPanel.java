@@ -1,4 +1,4 @@
-package de.kreth.vereinsmeisterschaft.gui.swing;
+package de.kreth.trampolinscore.gui.swing;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -9,22 +9,22 @@ import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import de.kreth.vereinsmeisterschaftprog.business.CompetitionBusiness;
-import de.kreth.vereinsmeisterschaftprog.data.Durchgang;
-import de.kreth.vereinsmeisterschaftprog.data.Ergebnis;
-import de.kreth.vereinsmeisterschaftprog.data.Wertung;
+import de.kreth.trampolinscore.business.CompetitionBusiness;
+import de.kreth.trampolinscore.data.RoutineType;
+import de.kreth.trampolinscore.data.Result;
+import de.kreth.trampolinscore.data.Routine;
 
 
 public class ErgebnisPanel extends JPanel {
 
    private static final long serialVersionUID = -126921232179715189L;
-   private Ergebnis ergebnis;
+   private Result ergebnis;
    private JLabel lblStarterName;
    private JLabel lblPflicht;
    private JLabel lblKuer;
    private JLabel lblErgebnis;
    private JLabel lblPlatz;
-   private Durchgang durchgang;
+   private RoutineType durchgang;
    private WertenDialog dlg;
    private DecimalFormat df;
    
@@ -33,7 +33,7 @@ public class ErgebnisPanel extends JPanel {
     * @param durchgang 
     * @param business 
     */
-   public ErgebnisPanel(final Ergebnis ergebnis, final Durchgang durchgang, CompetitionBusiness business) {
+   public ErgebnisPanel(final Result ergebnis, final RoutineType durchgang, CompetitionBusiness business) {
       this.ergebnis = ergebnis;
       FlowLayout flowLayout = (FlowLayout) getLayout();
       flowLayout.setHgap(15);
@@ -69,8 +69,8 @@ public class ErgebnisPanel extends JPanel {
    
    private void updateValues() {
       lblStarterName.setText(ergebnis.getStarterName());
-      lblPflicht.setText(df.format(ergebnis.getPflicht().getErgebnis()));
-      lblKuer.setText(df.format(ergebnis.getKuer().getErgebnis()));
+      lblPflicht.setText(df.format(ergebnis.getPflicht().getResult()));
+      lblKuer.setText(df.format(ergebnis.getKuer().getResult()));
       lblErgebnis.setText(df.format(ergebnis.getErgebnis()));
       lblPlatz.setText(df.format(ergebnis.getPlatz()));
    }
@@ -86,12 +86,12 @@ public class ErgebnisPanel extends JPanel {
 
    public void performButtonClick() {
 
-      Wertung wertung = null;
+      Routine wertung = null;
       switch (durchgang) {
-         case KUER:
+         case VOLUNTARY:
             wertung = ergebnis.getKuer();
             break;
-         case PFLICHT:
+         case COMPULSORY:
             wertung = ergebnis.getPflicht();
             break;
       }

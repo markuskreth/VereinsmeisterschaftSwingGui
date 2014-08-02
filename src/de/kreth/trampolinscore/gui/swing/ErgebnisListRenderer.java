@@ -1,4 +1,4 @@
-package de.kreth.vereinsmeisterschaft.gui.swing;
+package de.kreth.trampolinscore.gui.swing;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -6,15 +6,15 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
-import de.kreth.vereinsmeisterschaftprog.business.CompetitionBusiness;
-import de.kreth.vereinsmeisterschaftprog.data.Durchgang;
-import de.kreth.vereinsmeisterschaftprog.data.Ergebnis;
+import de.kreth.trampolinscore.business.CompetitionBusiness;
+import de.kreth.trampolinscore.data.RoutineType;
+import de.kreth.trampolinscore.data.Result;
 
 
 public class ErgebnisListRenderer extends DefaultListCellRenderer {
 
    private static final long serialVersionUID = -5584364908962488266L;
-   private Durchgang durchgang = Durchgang.PFLICHT;
+   private RoutineType durchgang = RoutineType.COMPULSORY;
    private CompetitionBusiness business;
    
    
@@ -26,9 +26,9 @@ public class ErgebnisListRenderer extends DefaultListCellRenderer {
    @Override
    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
       Component comp = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-      ErgebnisPanel panel = new ErgebnisPanel((Ergebnis) value, durchgang, business);
+      ErgebnisPanel panel = new ErgebnisPanel((Result) value, durchgang, business);
       
-      if(durchgang == Durchgang.KUER)
+      if(durchgang == RoutineType.VOLUNTARY)
          panel.setColor(Color.YELLOW);
       
       panel.setBackground(comp.getBackground());
@@ -37,7 +37,7 @@ public class ErgebnisListRenderer extends DefaultListCellRenderer {
       return panel;
    }
 
-   public void setDurchgang(Durchgang durchgang) {
+   public void setDurchgang(RoutineType durchgang) {
       this.durchgang = durchgang;
    }
 

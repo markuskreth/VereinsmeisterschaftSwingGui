@@ -1,4 +1,4 @@
-package de.kreth.vereinsmeisterschaft.gui.swing;
+package de.kreth.trampolinscore.gui.swing;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,11 +10,11 @@ import java.text.ParseException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import de.kreth.vereinsmeisterschaftprog.business.CompetitionBusiness;
-import de.kreth.vereinsmeisterschaftprog.business.InputConverter;
-import de.kreth.vereinsmeisterschaftprog.data.Durchgang;
-import de.kreth.vereinsmeisterschaftprog.data.Ergebnis;
-import de.kreth.vereinsmeisterschaftprog.data.Wertung;
+import de.kreth.trampolinscore.business.CompetitionBusiness;
+import de.kreth.trampolinscore.business.InputConverter;
+import de.kreth.trampolinscore.data.RoutineType;
+import de.kreth.trampolinscore.data.Result;
+import de.kreth.trampolinscore.data.Routine;
 
 public class WertenDialog extends JDialog implements PropertyChangeListener {
 
@@ -31,8 +31,8 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
    private JFormattedTextField txtDiff;
    private JLabel lblStarter;
    private String starterName;
-   private Wertung wertung;
-   private Wertung dummy;
+   private Routine wertung;
+   private Routine dummy;
    private JLabel lblErgebnis;
 
    /**
@@ -246,12 +246,12 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
 
                @Override
                public void actionPerformed(ActionEvent e) {
-                  wertung.setKari1(dummy.getKari1());
-                  wertung.setKari2(dummy.getKari2());
-                  wertung.setKari3(dummy.getKari3());
-                  wertung.setKari4(dummy.getKari4());
-                  wertung.setKari5(dummy.getKari5());
-                  wertung.setSchwierigkeit(dummy.getSchwierigkeit());
+                  wertung.setJudge1(dummy.getJudge1());
+                  wertung.setJudge2(dummy.getJudge2());
+                  wertung.setJudge3(dummy.getJudge3());
+                  wertung.setJudge4(dummy.getJudge4());
+                  wertung.setJudge5(dummy.getJudge5());
+                  wertung.setTariff(dummy.getTariff());
                   setVisible(false);
                }
             });
@@ -269,10 +269,10 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
       field.requestFocus();
    }
 
-   public void setWertung(String starterName, Wertung wertung) {
+   public void setWertung(String starterName, Routine wertung) {
       this.starterName = starterName;
       
-      setTitle(wertung.getDurchgang() + " " + starterName);
+      setTitle(wertung.getRoutine() + " " + starterName);
       
       this.wertung = wertung;
       updateView();
@@ -282,7 +282,7 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
       
       this.dummy = wertung.clone();
       
-      if (wertung.getDurchgang() == Durchgang.PFLICHT) {
+      if (wertung.getRoutine() == RoutineType.COMPULSORY) {
          txtDiff.setEnabled(false);
       } else {
          txtDiff.setEnabled(true);
@@ -290,39 +290,39 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
 
       lblStarter.setText(starterName);
 
-      if(wertung.getKari1()<=0)
+      if(wertung.getJudge1()<=0)
          txtKari1.setText("");
       else
-         txtKari1.setText(converter.format(wertung.getKari1()));
+         txtKari1.setText(converter.format(wertung.getJudge1()));
 
-      if(wertung.getKari2()<=0)
+      if(wertung.getJudge2()<=0)
          txtKari2.setText("");
       else
-         txtKari2.setText(converter.format(wertung.getKari2()));
+         txtKari2.setText(converter.format(wertung.getJudge2()));
 
-      if(wertung.getKari3()<=0)
+      if(wertung.getJudge3()<=0)
          txtKari3.setText("");
       else
-         txtKari3.setText(converter.format(wertung.getKari3()));
+         txtKari3.setText(converter.format(wertung.getJudge3()));
       
-      if(wertung.getKari4()<=0)
+      if(wertung.getJudge4()<=0)
          txtKari4.setText("");
       else
-         txtKari4.setText(converter.format(wertung.getKari4()));
-      if(wertung.getKari5()<=0)
+         txtKari4.setText(converter.format(wertung.getJudge4()));
+      if(wertung.getJudge5()<=0)
          txtKari5.setText("");
       else
-         txtKari5.setText(converter.format(wertung.getKari5()));
+         txtKari5.setText(converter.format(wertung.getJudge5()));
 
-      if(wertung.getSchwierigkeit()<=0)
+      if(wertung.getTariff()<=0)
          txtDiff.setText("");
       else
-         txtDiff.setText(converter.format(wertung.getSchwierigkeit()));
+         txtDiff.setText(converter.format(wertung.getTariff()));
 
-      if(wertung.getErgebnis()<=0)
+      if(wertung.getResult()<=0)
          lblErgebnis.setText(converter.format(0));
       else
-         lblErgebnis.setText(converter.format(wertung.getErgebnis()));
+         lblErgebnis.setText(converter.format(wertung.getResult()));
       
       txtKari1.requestFocus();
    }
@@ -348,23 +348,23 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
                
                switch (kari) {
                   case 1:
-                     wertung.setKari1(number);
+                     wertung.setJudge1(number);
                      break;
                   case 2:
-                     wertung.setKari2(number);
+                     wertung.setJudge2(number);
                      break;
                   case 3:
-                     wertung.setKari3(number);
+                     wertung.setJudge3(number);
                      break;
                   case 4:
-                     wertung.setKari4(number);
+                     wertung.setJudge4(number);
                      break;
                   case 5:
-                     wertung.setKari5(number);
+                     wertung.setJudge5(number);
                      break;
                   case 6:
                   case 7:
-                     wertung.setSchwierigkeit(number);
+                     wertung.setTariff(number);
                      break;
                   default:
                      break;
@@ -376,13 +376,13 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
             }
          
          
-         lblErgebnis.setText(converter.format(wertung.getErgebnis()));
+         lblErgebnis.setText(converter.format(wertung.getResult()));
       }
    }
 
    @Override
    public void propertyChange(PropertyChangeEvent evt) {
-      if(evt.getPropertyName().matches(Ergebnis.STARTERNAME_CHANGE_PROPERTY)) {
+      if(evt.getPropertyName().matches(Result.STARTERNAME_CHANGE_PROPERTY)) {
          starterName = evt.getNewValue().toString();               
          lblStarter.setText(starterName);
       }

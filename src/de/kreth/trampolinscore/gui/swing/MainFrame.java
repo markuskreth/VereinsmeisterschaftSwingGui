@@ -1,4 +1,4 @@
-package de.kreth.vereinsmeisterschaft.gui.swing;
+package de.kreth.trampolinscore.gui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -11,9 +11,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import de.kreth.vereinsmeisterschaftprog.business.MainBusiness;
-import de.kreth.vereinsmeisterschaftprog.data.CompetitionGroup;
-import de.kreth.vereinsmeisterschaftprog.views.MainView;
+import de.kreth.trampolinscore.business.MainBusiness;
+import de.kreth.trampolinscore.data.CompetitionGroup;
+import de.kreth.trampolinscore.views.MainView;
 
 public class MainFrame extends JFrame implements MainView {
 

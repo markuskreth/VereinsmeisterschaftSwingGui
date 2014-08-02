@@ -1,11 +1,9 @@
-package de.kreth.vereinsmeisterschaft.gui;
+package de.kreth.trampolinscore.gui;
 
 import java.awt.EventQueue;
 
-import de.kreth.vereinsmeisterschaft.gui.swing.MainFrame;
-import de.kreth.vereinsmeisterschaftprog.FactoryProductive;
-
-
+import de.kreth.trampolinscore.gui.swing.MainFrame;
+import de.kreth.trampolinscore.FactoryProductive;
 
 public class Application {
 
