@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import de.kreth.trampolinscore.Factory;
 import de.kreth.trampolinscore.business.MainBusiness;
 import de.kreth.trampolinscore.data.CompetitionGroup;
 import de.kreth.trampolinscore.views.MainView;
@@ -73,7 +74,7 @@ public class MainFrame extends JFrame implements MainView {
 
                CompetitionGroup selection = pflichtenView.getSelectedValue();
                if(selection != null)
-                  business.pflichtChange(selection);
+                  business.changeCompetitionGroup(selection);
             }
 
          }
@@ -94,8 +95,8 @@ public class MainFrame extends JFrame implements MainView {
       });
       
       panel.add(btnExport, BorderLayout.SOUTH);
-
-      business = new MainBusiness(this);
+      
+      business = new MainBusiness(this, Factory.getInstance().getPersister());
       WettkampfPanel wkPanel = new WettkampfPanel(business.getCompetitionBusiness());
       contentPane.add(wkPanel, BorderLayout.CENTER);
 

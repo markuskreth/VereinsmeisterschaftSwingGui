@@ -71,7 +71,7 @@ public class ErgebnisPanel extends JPanel {
       lblStarterName.setText(ergebnis.getStarterName());
       lblPflicht.setText(df.format(ergebnis.getPflicht().getResult()));
       lblKuer.setText(df.format(ergebnis.getKuer().getResult()));
-      lblErgebnis.setText(df.format(ergebnis.getErgebnis()));
+      lblErgebnis.setText(df.format(ergebnis.getResult()));
       lblPlatz.setText(df.format(ergebnis.getPlatz()));
    }
    

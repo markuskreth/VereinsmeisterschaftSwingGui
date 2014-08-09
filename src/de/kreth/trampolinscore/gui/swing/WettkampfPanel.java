@@ -224,7 +224,7 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
                break;
 
             case 3:
-               value = df.format(ergebnis.getErgebnis());
+               value = df.format(ergebnis.getResult());
                break;
             case 4:
                value = ergebnis.getPlatz() + ".";
@@ -254,7 +254,7 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
       
       if(wettkampf != null) {
          
-         for (Result e : wettkampf.getErgebnisse()) {
+         for (Result e : wettkampf.getResults()) {
             tableModel.addElement(e);
          }
          
