@@ -16,6 +16,7 @@ import de.kreth.trampolinscore.business.InputConverter;
 import de.kreth.trampolinscore.data.RoutineType;
 import de.kreth.trampolinscore.data.Result;
 import de.kreth.trampolinscore.data.Routine;
+import de.kreth.trampolinscore.data.Routine.Judge;
 
 public class WertenDialog extends JDialog implements PropertyChangeListener {
 
@@ -247,12 +248,12 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
 
                @Override
                public void actionPerformed(ActionEvent e) {
-                  wertung.setJudge1(dummy.getJudge1().doubleValue());
-                  wertung.setJudge2(dummy.getJudge2());
-                  wertung.setJudge3(dummy.getJudge3());
-                  wertung.setJudge4(dummy.getJudge4());
-                  wertung.setJudge5(dummy.getJudge5());
-                  wertung.setTariff(dummy.getTariff());
+                  wertung.setJudge(dummy.getJudge(Judge.JUDGE1), Judge.JUDGE1);
+                  wertung.setJudge(dummy.getJudge(Judge.JUDGE2), Judge.JUDGE2);
+                  wertung.setJudge(dummy.getJudge(Judge.JUDGE3), Judge.JUDGE3);
+                  wertung.setJudge(dummy.getJudge(Judge.JUDGE4), Judge.JUDGE4);
+                  wertung.setJudge(dummy.getJudge(Judge.JUDGE5), Judge.JUDGE5);
+                  wertung.setJudge(dummy.getJudge(Judge.TARIFF), Judge.TARIFF);
                   setVisible(false);
                }
             });
@@ -291,34 +292,34 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
 
       lblStarter.setText(starterName);
 
-      if(wertung.getJudge1().compareTo(BigDecimal.ZERO)<=0)
+      if(wertung.getJudge(Judge.JUDGE1).compareTo(BigDecimal.ZERO)<=0)
          txtKari1.setText("");
       else
-         txtKari1.setText(converter.format(wertung.getJudge1().doubleValue()));
+         txtKari1.setText(converter.format(wertung.getJudge(Judge.JUDGE1).doubleValue()));
 
-      if(wertung.getJudge2().compareTo(BigDecimal.ZERO)<=0)
+      if(wertung.getJudge(Judge.JUDGE2).compareTo(BigDecimal.ZERO)<=0)
          txtKari2.setText("");
       else
-         txtKari2.setText(converter.format(wertung.getJudge2().doubleValue()));
+         txtKari2.setText(converter.format(wertung.getJudge(Judge.JUDGE2).doubleValue()));
 
-      if(wertung.getJudge3().compareTo(BigDecimal.ZERO)<=0)
+      if(wertung.getJudge(Judge.JUDGE3).compareTo(BigDecimal.ZERO)<=0)
          txtKari3.setText("");
       else
-         txtKari3.setText(converter.format(wertung.getJudge3().doubleValue()));
+         txtKari3.setText(converter.format(wertung.getJudge(Judge.JUDGE3).doubleValue()));
       
-      if(wertung.getJudge4().compareTo(BigDecimal.ZERO)<=0)
+      if(wertung.getJudge(Judge.JUDGE4).compareTo(BigDecimal.ZERO)<=0)
          txtKari4.setText("");
       else
-         txtKari4.setText(converter.format(wertung.getJudge4().doubleValue()));
-      if(wertung.getJudge5().compareTo(BigDecimal.ZERO)<=0)
+         txtKari4.setText(converter.format(wertung.getJudge(Judge.JUDGE4).doubleValue()));
+      if(wertung.getJudge(Judge.JUDGE5).compareTo(BigDecimal.ZERO)<=0)
          txtKari5.setText("");
       else
-         txtKari5.setText(converter.format(wertung.getJudge5().doubleValue()));
+         txtKari5.setText(converter.format(wertung.getJudge(Judge.JUDGE5).doubleValue()));
 
-      if(wertung.getTariff().compareTo(BigDecimal.ZERO)<=0)
+      if(wertung.getJudge(Judge.TARIFF).compareTo(BigDecimal.ZERO)<=0)
          txtDiff.setText("");
       else
-         txtDiff.setText(converter.format(wertung.getTariff().doubleValue()));
+         txtDiff.setText(converter.format(wertung.getJudge(Judge.TARIFF).doubleValue()));
 
       if(wertung.getResult().compareTo(BigDecimal.ZERO)<=0)
          lblErgebnis.setText(converter.format(0));
@@ -349,23 +350,23 @@ public class WertenDialog extends JDialog implements PropertyChangeListener {
                
                switch (kari) {
                   case 1:
-                     wertung.setJudge1(BigDecimal.valueOf(number));
+                     wertung.setJudge(BigDecimal.valueOf(number), Judge.JUDGE1);
                      break;
                   case 2:
-                     wertung.setJudge2(BigDecimal.valueOf(number));
+                     wertung.setJudge(BigDecimal.valueOf(number), Judge.JUDGE2);
                      break;
                   case 3:
-                     wertung.setJudge3(BigDecimal.valueOf(number));
+                     wertung.setJudge(BigDecimal.valueOf(number), Judge.JUDGE3);
                      break;
                   case 4:
-                     wertung.setJudge4(BigDecimal.valueOf(number));
+                     wertung.setJudge(BigDecimal.valueOf(number), Judge.JUDGE4);
                      break;
                   case 5:
-                     wertung.setJudge5(BigDecimal.valueOf(number));
+                     wertung.setJudge(BigDecimal.valueOf(number), Judge.JUDGE5);
                      break;
                   case 6:
                   case 7:
-                     wertung.setTariff(BigDecimal.valueOf(number));
+                     wertung.setJudge(BigDecimal.valueOf(number), Judge.TARIFF);
                      break;
                   default:
                      break;

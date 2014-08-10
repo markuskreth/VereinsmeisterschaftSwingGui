@@ -216,11 +216,11 @@ public class WettkampfPanel extends JPanel implements CompetitionView {
                break;
 
             case 1:
-               value = df.format(ergebnis.getPflicht().getResult());
+               value = df.format(ergebnis.getCompulsory().getResult());
                break;
 
             case 2:
-               value = df.format(ergebnis.getKuer().getResult());
+               value = df.format(ergebnis.getVoluntary().getResult());
                break;
 
             case 3:

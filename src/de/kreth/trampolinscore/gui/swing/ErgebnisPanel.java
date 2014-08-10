@@ -69,8 +69,8 @@ public class ErgebnisPanel extends JPanel {
    
    private void updateValues() {
       lblStarterName.setText(ergebnis.getStarterName());
-      lblPflicht.setText(df.format(ergebnis.getPflicht().getResult()));
-      lblKuer.setText(df.format(ergebnis.getKuer().getResult()));
+      lblPflicht.setText(df.format(ergebnis.getCompulsory().getResult()));
+      lblKuer.setText(df.format(ergebnis.getVoluntary().getResult()));
       lblErgebnis.setText(df.format(ergebnis.getResult()));
       lblPlatz.setText(df.format(ergebnis.getPlatz()));
    }
@@ -89,10 +89,10 @@ public class ErgebnisPanel extends JPanel {
       Routine wertung = null;
       switch (durchgang) {
          case VOLUNTARY:
-            wertung = ergebnis.getKuer();
+            wertung = ergebnis.getVoluntary();
             break;
          case COMPULSORY:
-            wertung = ergebnis.getPflicht();
+            wertung = ergebnis.getCompulsory();
             break;
       }
       
