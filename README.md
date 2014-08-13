@@ -1,4 +1,4 @@
 VereinsmeisterschaftSwingGui
 ============================
 
-Swing Frontend zu https://github.com/markuskreth/vereinsmeisterschaft
+Swing Frontend zu https://github.com/markuskreth/TrampolinScore
